@@ -15,7 +15,11 @@ import Observation
     
     let types: Set = [HKQuantityType(.stepCount), HKQuantityType(.bodyMass)]
     
+    
+    // From HealthKit Documentation
+    
     func fetchStepCount() async {
+        // Ranges
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: .now)
         let endDate = calendar.date(byAdding: .day, value: 1, to: today)!

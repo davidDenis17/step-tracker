@@ -22,10 +22,15 @@ enum HealthMetricContext: CaseIterable, Identifiable {
 }
 
 struct DashboardView: View {
-
+    
+    // HealthKit Manager
     @Environment(HealthKitManager.self) private var hkManager
+    
+    // used to store small stuff in app
     @AppStorage("hasSeenPermissionPriming") private
         var hasSeenPermissionPriming: Bool = false
+    
+    // sheet
     @State private var isShowingPermissionPrimingSheet: Bool = false
 
     @State private var selectedStat: HealthMetricContext = .steps
@@ -100,6 +105,7 @@ struct DashboardView: View {
             }
             .padding()
             .task {
+                // call functions to fetch data from Health App
                 isShowingPermissionPrimingSheet = !hasSeenPermissionPriming
             }
             .navigationTitle("Dashboard")

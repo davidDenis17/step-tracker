@@ -5,6 +5,8 @@
 //  Created by David Denis on 10/22/24.
 //
 
+// Permission View for Health Kit
+
 import SwiftUI
 import HealthKitUI
 
@@ -50,6 +52,7 @@ struct HealthKitPermissionPrimingView: View {
         .padding(30)
         .interactiveDismissDisabled()
         .onAppear{ hasSeen = true }
+        // HealthKit UI provides this screen
         .healthDataAccessRequest(store: hkManager.store,
                                  shareTypes: hkManager.types,
                                  readTypes: hkManager.types,

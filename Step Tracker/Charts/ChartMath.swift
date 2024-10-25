@@ -8,7 +8,7 @@
 import Foundation
 import Algorithms
 
-struct ChartMathTests {
+struct ChartMath {
     
     static func averageWeekdayCount(for metric: [HealthMetric]) -> [WeekdayChartData] {
         

@@ -70,6 +70,7 @@ struct DashboardView: View {
                 // call functions to fetch data from Health App
                 await hkManager.fetchStepCount()
                 await hkManager.fetchWeight()
+                ChartMath.averageDailyWeightDiff(for: hkManager.weightDiffData)
                 isShowingPermissionPrimingSheet = !hasSeenPermissionPriming
             }
             .navigationTitle("Dashboard")

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Charts
 
 struct HealthDataListView: View {
     
@@ -16,14 +17,19 @@ struct HealthDataListView: View {
     @State private var valueToAdd: String = ""
     var metric: HealthMetricContext
     
+    var listData: [HealthMetric] {
+        metric == .steps ? hkManager.stepData : hkManager.weightData
+        
+    }
+    
 
     var body: some View {
-        List(metric == .steps ? hkManager.stepData : hkManager.weightData, id: \.self) { i in
+        List(listData.reversed(), id: \.self) { data in
             HStack {
-                Text(i.date, format: .dateTime.month().day().year())
+                Text(data.date, format: .dateTime.month().day().year())
                 Spacer()
                 Text(
-                    i.value,
+                    data.value,
                     format: .number.precision(
                         .fractionLength(metric == .steps ? 0 : 1)))
             }
@@ -31,7 +37,7 @@ struct HealthDataListView: View {
         .navigationTitle(metric.title)
         .sheet(isPresented: $isShowingAddData) {
             addDataView
-                .presentationDetents([.height(400)])
+                .presentationDetents([.height(250)])
                 .presentationCornerRadius(30)
                 .padding()
         }
@@ -61,13 +67,26 @@ struct HealthDataListView: View {
             }
             .background(
                 Color.secondary.opacity(0.1).clipShape(
-                    RoundedRectangle(cornerRadius: 30))
+                    RoundedRectangle(cornerRadius: 25))
             )
             .scrollContentBackground(.hidden)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Add Data") {
-                        // Code Later
+                        Task {
+                            if metric == .steps {
+                                await hkManager.addStepData(for: addDataDate, value: Double(valueToAdd)!)
+                                await hkManager.fetchStepCount()
+                                isShowingAddData = false
+                            } else {
+                                await hkManager.addWeightData(for: addDataDate, value: Double(valueToAdd)!)
+                                await hkManager.fetchWeight()
+                                await hkManager.fetchWeightDiffData()
+                                isShowingAddData = false
+                            }
+                            
+                            
+                        }
                     }
                 }
 

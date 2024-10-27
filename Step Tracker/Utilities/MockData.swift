@@ -23,4 +23,13 @@ struct MockData {
         }
         return array
     }
+    
+    
+    static var weightDiff: [WeekdayChartData] {
+        var diff: [WeekdayChartData] = []
+        for i in 0..<7 {
+            diff.append(WeekdayChartData(date: Calendar.current.date(byAdding: .day, value: -i, to: .now)!, value: .random(in: -3...3)))
+        }
+        return diff
+    }
 }

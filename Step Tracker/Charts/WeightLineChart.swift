@@ -28,6 +28,10 @@ struct WeightLineChart: View {
         }
         
     }
+    
+    var weightAvg: Double {
+        chartData.reduce(0) { $0 + $1.value } / Double(chartData.count)
+    }
 
     var body: some View {
         VStack {
@@ -38,7 +42,7 @@ struct WeightLineChart: View {
                             .font(.title3.bold())
                             .foregroundStyle(.indigo)
 
-                        Text("Avg: 180 lbs")
+                        Text("Avg: \(weightAvg, specifier: "%.1f") lbs")
                             .font(.caption)
                     }
                     Spacer()

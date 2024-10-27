@@ -18,7 +18,7 @@ struct HealthDataListView: View {
     
 
     var body: some View {
-        List(hkManager.stepData, id: \.self) { i in
+        List(metric == .steps ? hkManager.stepData : hkManager.weightData, id: \.self) { i in
             HStack {
                 Text(i.date, format: .dateTime.month().day().year())
                 Spacer()

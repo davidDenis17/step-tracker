@@ -74,7 +74,7 @@ import Observation
             let calendar = Calendar.current
             let today = calendar.startOfDay(for: .now)
             let endDate = calendar.date(byAdding: .day, value: 1, to: today)!
-            let startDate = calendar.date(byAdding: .day, value: -28, to: endDate)!
+            let startDate = calendar.date(byAdding: .day, value: -29, to: endDate)!
             
             let queryPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
             let samplePredicate = HKSamplePredicate.quantitySample(type: HKQuantityType(.bodyMass), predicate: queryPredicate)

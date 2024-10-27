@@ -42,8 +42,7 @@ struct ChartMath {
 
     }
 
-    static func averageDailyWeightDiff(for weights: [HealthMetric])
-        -> [WeekdayChartData]
+    static func averageDailyWeightDiff(for weights: [HealthMetric]) -> [WeekdayChartData]
     {
         var diffValues: [(date: Date, value: Double)] = []
 
@@ -56,7 +55,7 @@ struct ChartMath {
         }
 
         // sorting by the weekday INTs (smallest is 1 (Sunday)) extension to Date
-        let sortedByWeekday = weights.sorted {
+        let sortedByWeekday = diffValues.sorted {
             $0.date.weekdayInt < $1.date.weekdayInt
         }
 

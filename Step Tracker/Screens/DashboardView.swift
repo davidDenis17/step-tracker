@@ -58,11 +58,9 @@ struct DashboardView: View {
                         WeightLineChart(selectedStat: selectedStat, chartData: hkManager.weightData)
                         
                         WeightDiffBarChart(chartData: ChartMath.averageDailyWeightDiff(for: hkManager.weightDiffData))
+                        
                     }
                     
-                    
-                    
-                    /// Bottom Chart
                     
                     
                 }
@@ -71,9 +69,10 @@ struct DashboardView: View {
             .task {
                 // call functions to fetch data from Health App
                 await hkManager.fetchStepCount()
-                await hkManager.fetchWeight()
                 await hkManager.fetchWeightDiffData()
-                ChartMath.averageDailyWeightDiff(for: hkManager.weightDiffData)
+                await hkManager.fetchWeight()
+                
+                
                 isShowingPermissionPrimingSheet = !hasSeenPermissionPriming
             }
             .navigationTitle("Dashboard")

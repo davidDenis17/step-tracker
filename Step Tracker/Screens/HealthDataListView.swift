@@ -37,7 +37,7 @@ struct HealthDataListView: View {
         .navigationTitle(metric.title)
         .sheet(isPresented: $isShowingAddData) {
             addDataView
-                .presentationDetents([.height(250)])
+                .presentationDetents([.height(265)])
                 .presentationCornerRadius(30)
                 .padding()
         }

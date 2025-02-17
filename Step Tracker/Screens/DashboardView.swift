@@ -68,6 +68,8 @@ struct DashboardView: View {
             .padding()
             .task {
                 // call functions to fetch data from Health App
+                
+                //await hkManager.addSimulatorData()
                 await hkManager.fetchStepCount()
                 await hkManager.fetchWeightDiffData()
                 await hkManager.fetchWeight()
